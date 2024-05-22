@@ -19,19 +19,93 @@
         // return profile;
       }
       // 👉 CHALLENGE 2
-      function mineSweeper(grid, x, y) {}
+
+      function mineSweeper(grid, x, y) {
+        const yGrid = grid[y - 1];
+        if (x < 1 || x > 3 || y < 1 || y > 3) {
+          return "invalid coordinates";
+        }
+        let pick = yGrid[x - 1];
+        if (pick === "🟥") {
+          return "🟥 💀";
+        } else {
+          return "🟦 🥳";
+        }
+      }
 
       // 👉 CHALLENGE 3
-      function booleanize(obj) {}
+      function booleanize(obj) {
+        for (let key in obj) {
+          if (key.length > 9) {
+            return "shorten all prop names to 9 chars or less";
+          } else if (obj[key] === null) {
+            delete obj[key];
+          } else if (obj[key] === 0) {
+            obj[key] = false;
+          } else if (obj[key] === 1) {
+            obj[key] = true;
+          }
+        }
+        return obj;
+      }
 
       // 👉 CHALLENGE 4
-      function scrub(text, forbidden) {}
+      function scrub(text, forbidden) {
+        scrubedTextArr = [];
+        let textString = text.split(" ");
+        for (let index in textString) {
+          let word = textString[index];
+          let isForbidden = false;
+          for (let idx in forbidden) {
+            if (word === forbidden[idx]) {
+              isForbidden = true;
+              break;
+            }
+          }
+
+          if (isForbidden) {
+            let storeXArr = [];
+            for (let stringIndex in word) {
+              storeXArr.push("x");
+            }
+            scrubedTextArr.push(storeXArr.join(""));
+          } else {
+            scrubedTextArr.push(word);
+          }
+        }
+        let textToString = scrubedTextArr.toString().split(",");
+        return textToString.join(" ");
+      }
 
       // 👉 CHALLENGE 5 (bonus, NOT graded)
-      function normalizePhoneNumber(num) {}
+      function normalizePhoneNumber(num) {
+        const areaCode = num.slice(0, 3);
+        const firstThree = num.slice(3, 6);
+        const lastFour = num.slice(6, 10);
+        return `(${areaCode}) ${firstThree}-${lastFour}`;
+
+        console.log(areaCode);
+        console.log(firstThree);
+        console.log(lastFour);
+      }
 
       // 👉 CHALLENGE 6 (bonus, NOT graded)
-      function diceRolls() {}
+      function diceRolls() {
+        let throws = 0;
+        let counter = 0;
+        while (counter < 3) {
+          throws++;
+
+          dieRoll = Math.floor(Math.random() * (7 - 1) + 1);
+          console.log(dieRoll);
+          if (dieRoll === 6) {
+            counter++;
+          } else {
+            counter = 0;
+          }
+        }
+        return throws;
+      }
 
       // 🧪 DO NOT make any changes below this line ===================
       globalThis.challengeVersion = 1;
